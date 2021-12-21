@@ -1,19 +1,27 @@
-Grid grid;
-final int windowHeight = 360;
-final int windowWidth = 640;
-final float squareSize = 20;
-boolean running = false;
-int tick = 0;
-int runCounter = 0;
+static final int WINDOW_HEIGHT = 360;
+static final int WINDOW_WIDTH  = 640;
+static final float SQUARE_SIZE = 20;
+static final int SQUARE_COLOR_DEAD = 0;
+static final int SQUARE_COLOR_ALIVE = 250;
+static final int SQUARE_BORDER_OFF = 0;
+static final int SQUARE_BORDER_ON = 250;
+static final int TICK_BETWEEN_RUN = 10;
+static final int COLOR_ANIMATION_TICK  = (SQUARE_COLOR_ALIVE - SQUARE_COLOR_DEAD) / TICK_BETWEEN_RUN;
+
 boolean[] rules = new boolean[8];
 ArrayList<Runnable> arraylist = new ArrayList<Runnable>();
 
+Grid grid;
+boolean running = false;
+int tick = 0;
+int runCounter = 0;
+
 void settings() {
-    size(windowWidth, windowHeight);
+    size(WINDOW_WIDTH, WINDOW_HEIGHT);
 }
 
 void setup() {
-    grid = new Grid(windowWidth, windowHeight, squareSize);
+    grid = new Grid(WINDOW_WIDTH, WINDOW_HEIGHT, SQUARE_SIZE);
     background(0);
     initRules(8, false);
     frameRate(30);
@@ -40,7 +48,7 @@ void initRules(int size, boolean random) {
 void draw() {
     grid.drawGrid();
     if (running) {
-        if (tick > 3) {
+        if (tick > TICK_BETWEEN_RUN) {
             grid.processGrid();
             tick = 0;
             runCounter++;
@@ -55,8 +63,8 @@ void draw() {
 }
 
 void mousePressed() {
-  int squareX = floor(mouseX/ squareSize);
-  int squareY = floor(mouseY / squareSize);
+  int squareX = floor(mouseX/ SQUARE_SIZE);
+  int squareY = floor(mouseY / SQUARE_SIZE);
 
   if (squareY < grid.grid.length && squareX < grid.grid[squareY].length) {
     grid.grid[squareY][squareX].manualTrigger();
@@ -64,13 +72,25 @@ void mousePressed() {
 }
 
 void keyPressed() {
-    if (key == ' ') {
-        running = !running;
-    } else if (key == 'c') {
-        grid.initGrid();
-        initRules(8, false);
-    } else if (key == 'r') {
-        grid.randomizeGrid();
-        initRules(8, true);
+    switch (key) {
+        case ' ': {
+            running = !running;
+            break;
+        }
+        case 'c' :{
+            grid.initGrid();
+            initRules(8, false);
+            break;
+        }
+        case 'r' :{
+            grid.randomizeGrid();
+            initRules(8, true);
+            break;
+        }
+        case 'g' :{
+            grid.borderOn = !grid.borderOn;
+            break;
+        } default :
+            break;
     }
 }

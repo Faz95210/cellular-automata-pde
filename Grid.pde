@@ -6,6 +6,8 @@ class Grid {
     final float height;
     Square[][] grid;
     final float squareSize;
+    boolean borderOn = true;
+
     Grid(final float width, final float height, final float squareSize) {
         this.rows = floor(height/squareSize);
         this.columns = floor(width/squareSize);
@@ -131,7 +133,7 @@ class Grid {
     void drawGrid() {
         for (int y = 0; y < this.grid.length; y++) {
             for (int x = 0; x < this.grid[y].length; x++) {
-                this.grid[y][x].drawSquare();
+                this.grid[y][x].drawSquare(borderOn);
             }
         }
     }

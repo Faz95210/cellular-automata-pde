@@ -42,38 +42,35 @@ class Square {
         return this.status == Status.Birthing || this.status == Status.Alive;
     }
     
-    void drawSquare() {
+    void drawSquare(boolean borderOn) {
+        bordersColor = borderOn ? SQUARE_BORDER_ON : fillColor;
         switch (status) {
             case Empty:
-                fillColor = 0;
-                bordersColor = 0;
+                fillColor = SQUARE_COLOR_DEAD;
                 break;
             case Alive:
-                fillColor = 250;
-                bordersColor = 0;
+                fillColor = SQUARE_COLOR_ALIVE;
                 break;
             case Dead:
-                fillColor = 0;
-                bordersColor = 0;
+                fillColor = SQUARE_COLOR_DEAD;
                 break;
             case Dying:
-                // This square is dying so we draw it first so as to not override death animation.
-                bordersColor = 0;
-                fillColor -= 25;
-                if (fillColor < 0) {
-                    fillColor = 0;
+                fillColor -= COLOR_ANIMATION_TICK;
+                if (fillColor < SQUARE_COLOR_DEAD) {
+                    fillColor = SQUARE_COLOR_DEAD;
                 } else {
                     status = Status.Dead;
                 }
                 break;
             case Birthing:
-                if (fillColor < 250)  {
-                    fillColor += 25;
-                    if (fillColor > 250) fillColor = 250;
+                if (fillColor < SQUARE_COLOR_ALIVE)  {
+                    fillColor += COLOR_ANIMATION_TICK;
+                    if (fillColor > SQUARE_COLOR_ALIVE) {
+                        fillColor = SQUARE_COLOR_ALIVE;
+                    } 
                 } else {
                     status = Status.Alive;
                 }
-                bordersColor = 0;
                 break;
             default:
             break;
