@@ -73,24 +73,28 @@ void mousePressed() {
 
 void keyPressed() {
     switch (key) {
-        case ' ': {
+        case ' ': 
             running = !running;
             break;
-        }
-        case 'c' :{
+        case 'c' :
+        case 'C' :
             grid.initGrid();
             initRules(8, false);
             break;
-        }
-        case 'r' :{
+        case 'r' :
+        case 'R' :
             grid.randomizeGrid();
             initRules(8, true);
             break;
-        }
-        case 'g' :{
+        case 'g' :
+        case 'G' :
             grid.borderOn = !grid.borderOn;
             break;
-        } default :
+        case 'a' :
+        case 'A' :
+            grid.animationOn = !grid.animationOn;
+            break;
+        default :
             break;
     }
 }

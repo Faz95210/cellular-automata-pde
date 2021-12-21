@@ -29,17 +29,33 @@ class Square {
         case Empty:
         case Dying:
         case Dead:
-            this.status = Status.Birthing;
+            this.giveBirth(false);
             break;
         case Birthing:
         case Alive:
-            this.status = Status.Dying;
+            this.kill(false);
             break;
         }
     }
 
     boolean isAlive() {
         return this.status == Status.Birthing || this.status == Status.Alive;
+    }
+
+    void giveBirth(boolean animation) {
+        if (animation) {
+            this.status = Status.Birthing;
+        } else {
+            this.status = Status.Alive;
+        }
+    }
+    
+    void kill(boolean animation) {
+        if (animation) {
+            this.status = Status.Dying;
+        } else {
+            this.status = Status.Dead;
+        }
     }
     
     void drawSquare(boolean borderOn) {

@@ -6,7 +6,9 @@ class Grid {
     final float height;
     Square[][] grid;
     final float squareSize;
+    
     boolean borderOn = true;
+    boolean animationOn = true;
 
     Grid(final float width, final float height, final float squareSize) {
         this.rows = floor(height/squareSize);
@@ -102,10 +104,10 @@ class Grid {
         }    
 
         for (final Square square : dyingSquares) {
-            square.status = Status.Dying;
+            square.kill(animationOn);
         }
         for (final Square square : birthingSquares) {
-            square.status = Status.Birthing;
+            square.giveBirth(animationOn);
         }
     }
 
@@ -122,9 +124,9 @@ class Grid {
         for (int y = 0; y < this.grid.length; y++) {
             for (int x = 0; x < this.grid[y].length; x++) {
                 float state = random (100);
-                    grid[y][x].status = Status.Dead;
+                this.grid[y][x].kill(animationOn);
                 if (state < 15) {
-                    grid[y][x].status = Status.Alive;
+                    this.grid[y][x].giveBirth(animationOn);
                 }
             }
         }
