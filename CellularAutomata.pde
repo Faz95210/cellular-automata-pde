@@ -94,6 +94,10 @@ void keyPressed() {
         case 'A' :
             grid.animationOn = !grid.animationOn;
             break;
+        case 'q' :
+        case 'Q' :
+            exit();
+            break;
         default :
             break;
     }
