@@ -1,5 +1,5 @@
-static final int WINDOW_HEIGHT = 360;
-static final int WINDOW_WIDTH  = 640;
+static final int WINDOW_HEIGHT = 600;
+static final int WINDOW_WIDTH  = 1000;
 static final float SQUARE_SIZE = 20;
 static final int SQUARE_COLOR_DEAD = 0;
 static final int SQUARE_COLOR_ALIVE = 250;

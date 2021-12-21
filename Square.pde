@@ -43,7 +43,9 @@ class Square {
     }
     
     void drawSquare(boolean borderOn) {
-        bordersColor = borderOn ? SQUARE_BORDER_ON : fillColor;
+        // If we don't want a border then border needs to be same as fillColor
+        // Else it has to be the opposit
+        bordersColor = borderOn ? (fillColor == SQUARE_BORDER_OFF ? SQUARE_BORDER_ON : SQUARE_BORDER_OFF ) : fillColor;
         switch (status) {
             case Empty:
                 fillColor = SQUARE_COLOR_DEAD;
